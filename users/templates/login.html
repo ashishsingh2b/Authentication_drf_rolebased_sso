@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: darkblue;
+        }
+        .sso-button {
+            background: #4285F4;
+            margin-top: 15px;
+        }
+        .sso-button:hover {
+            background: #357AE8;
+        }
+        select {
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <p>Please select your role before logging in.</p>  
+
+        <form id="sso-form">
+            <label for="role">Select Role:</label>
+            <select name="role" id="role">
+                <option value="Customer">Customer</option>
+                <option value="Engineer">Engineer</option>
+                <option value="Project Manager">Project Manager</option>
+            </select>
+            
+            <button type="submit" class="sso-button">Sign in with Google</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('sso-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let selectedRole = document.getElementById('role').value;
+            let ssoURL = `http://127.0.0.1:8000/auth/login/google-oauth2/?role=${encodeURIComponent(selectedRole)}`;
+            window.location.href = ssoURL;
+        });
+    </script>
+</body>
+</html>

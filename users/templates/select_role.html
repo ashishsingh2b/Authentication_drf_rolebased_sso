@@ -1,0 +1,20 @@
+<form id="ssoForm">
+    <label>Select Role:</label>
+    <select id="roleSelect" name="role" required>
+        <option value="Customer">Customer</option>
+        <option value="Engineer">Engineer</option>
+        <option value="Project Manager">Project Manager</option>
+    </select>
+    <button type="submit">Continue with Google</button>
+</form>
+
+<script>
+    document.getElementById('ssoForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        let selectedRole = document.getElementById('roleSelect').value;
+        let ssoURL = `http://127.0.0.1:8000/auth/login/google-oauth2/?role=${encodeURIComponent(selectedRole)}`;
+        
+        window.location.href = ssoURL; // Redirect to Google SSO with the role parameter
+    });
+</script>
